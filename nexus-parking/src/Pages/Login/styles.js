@@ -126,7 +126,8 @@ export const Carousel = styled.div`
             width: 20px;
             margin-right: 10px;
 
-            .active{
+            &:active,
+            &:focus{
                background-color: #424242;
                height: 24px;
                width: 24px;

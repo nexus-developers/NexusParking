@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom'
 
@@ -19,11 +19,15 @@ import {
     CarouselTextLarge
 } from './styles';
 
+import Register from '../Register/Register'
+
 import Logo from './assets/Logo.png'
 
 import CarouselComponent from '../../Components/Carousel/Carousel'
 
 export default function Login() {
+    const [ modal, setModal ] = useState(false)
+
   return (
     <Container className='Container-fluid'>
         <div className='row'>
@@ -37,7 +41,7 @@ export default function Login() {
                         <small>Digite seu usuário ou e-mail</small>
                         <input className='form-control'/>
                         <Link>
-                            Esqueceu a senha?
+                            Esqueceu o usuário?
                         </Link>
                     </UserForm>
                     <PasswordForm>
@@ -54,7 +58,9 @@ export default function Login() {
                 </SubmitButton>
 
                 <h5>Assinar o Nexus Parking</h5>
-                <RegisterButton>
+                <RegisterButton
+                    onClick={() => setModal(true)}
+                >
                    Assinar
                 </RegisterButton>
             </LoginContainer>
@@ -77,7 +83,7 @@ export default function Login() {
                         </CarouselTextLarge>
 
                         <ol className="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                         </ol>
@@ -88,6 +94,13 @@ export default function Login() {
                 </Carousel>
             </CarouselContainer>
         </div>
+        {
+            modal ? (
+                <Register/>
+            ) : (
+                null
+            )
+        }
     </Container>
   );
 }
