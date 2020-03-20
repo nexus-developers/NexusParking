@@ -1,0 +1,11 @@
+{
+  "name": "NexusParking",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nexus-developers/NexusParking.git",
+  "author": "Geraldo Domingos <geraldo.dsn2000@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mdbreact": "^4.25.4"
+  }
+}
