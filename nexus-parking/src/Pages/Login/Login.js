@@ -16,7 +16,8 @@ import {
     Title2,
     Carousel,
     CarouselTextSmall,
-    CarouselTextLarge
+    CarouselTextLarge,
+    SmallText
 } from './styles';
 
 import Register from '../Register/Register'
@@ -29,7 +30,7 @@ export default function Login() {
     const [ modal, setModal ] = useState(false)
 
   return (
-    <Container className='Container-fluid'>
+    <Container className=''>
         <div className='row'>
             <LoginContainer className='col-md-4'>
                 <LogoContainer>
@@ -51,18 +52,22 @@ export default function Login() {
                             Oops, esqueci minha senha...
                         </Link>
                     </PasswordForm>
+
                 </FormContainer>
 
-                <SubmitButton>
-                    Fazer Login
-                </SubmitButton>
+                <Link to='/dashboard'>
+                    <SubmitButton>
+                        Fazer Login
+                    </SubmitButton>
+                </Link>
 
                 <h5>Assinar o Nexus Parking</h5>
                 <RegisterButton
                     onClick={() => setModal(true)}
-                >
+                    >
                    Assinar
                 </RegisterButton>
+                    <SmallText>Todos os direitos reservados há Nexus Developers!</SmallText>
             </LoginContainer>
             <CarouselContainer className='col-md-8'>
                 <Title1>

@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    overflow: hidden;
+    position: fixed;
 `;
+
+export const SmallText = styled.small`
+display: flex;
+    margin-top: 50px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 15px;
+`
 
 export const LoginContainer = styled.div`
     background-color: #FFFFFF;
@@ -18,7 +26,6 @@ export const LoginContainer = styled.div`
         font-size: 15px;
         color: #424242;
     }
-
 `
 
 export const LogoContainer = styled.div`

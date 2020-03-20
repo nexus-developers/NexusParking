@@ -6,6 +6,7 @@
   "author": "Geraldo Domingos <geraldo.dsn2000@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "mdbreact": "^4.25.4"
+    "mdbreact": "^4.25.4",
+    "react-icons": "^3.9.0"
   }
 }
