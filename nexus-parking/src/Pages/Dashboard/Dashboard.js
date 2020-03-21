@@ -5,6 +5,7 @@ import { Container } from '../../Components/Container/Container';
 
 import { IoIosSearch } from 'react-icons/io'
 
+
 // Intern Styles
 import {
   InternContainer,
@@ -17,7 +18,20 @@ import {
   MenuTitle,
   MenuDescription,
   SearchCamp,
-  SearchButton
+  SearchButton,
+  CardsContainer,
+  Cards,
+  Card,
+  BadgeElement,
+  CarModel,
+  Divisor,
+  CarInformations,
+  LicensePlate,
+  CarColor,
+  FinishButton,
+  AreaDivisor,
+  Hr,
+  AreaDivisorText
 } from './styles'
 
 export default function Dashboard() {
@@ -59,6 +73,143 @@ export default function Dashboard() {
             </SearchButton>
           </SearchCamp>
         </Menu>
+      
+      <CardsContainer>
+        <Cards className='row' >
+            <Card className='shadow'>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+
+            <Card className='shadow'>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+
+            <Card className='shadow'>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+        
+
+        <Card className='shadow'>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+
+            <Card className='shadow'>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+            </Cards>
+      </CardsContainer>
+      
+      <AreaDivisor>
+        <Hr/>
+        <AreaDivisorText>Isso é tudo</AreaDivisorText>
+        <Hr/>
+      </AreaDivisor>
+
+      <MenuTitleDiv>
+        <MenuTitle>
+          Carros Recentes
+        </MenuTitle>
+        <MenuDescription>
+          Exibindo todos que saíram recentimente
+        </MenuDescription>
+      </MenuTitleDiv>
+      <CardsContainer>
+        <Cards className='row' >
+            <Card className='shadow'>
+              <header>
+                  <BadgeElement finalizado/>
+                  <span>Saída: 18:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton finalizado>
+                    Finalizado
+                </FinishButton>
+              </Divisor>
+            </Card>
+          </Cards>
+        </CardsContainer>
       </InternContainer>
     </Container>
   );

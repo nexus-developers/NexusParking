@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   top: 0;
   height: 100vh;
-  width: 20vw;
+  width: 16vw;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -14,8 +14,8 @@ export const Container = styled.div`
 export const LogoContainer = styled.div`
   
   img{
-    width: 300px;
-    margin-top: 40px;
+    width: 250px;
+    margin-top: 10px;
   }
 `
 
