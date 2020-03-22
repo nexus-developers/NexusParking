@@ -1,11 +1,10 @@
 import React from 'react';
 
 // Extern Container
-import { Container } from '../../Components/Container/Container';
+import { Container, InternContainer } from '../../Components/Container/Container';
 
 // Intern Styles Component
 import { 
-    InternContainer, 
     ModalContainer,
     CloseButton,
     ModalInternContainer,
@@ -18,7 +17,7 @@ import {
     BadgeElement
 } from './styles'
 
-import { MdClose, MdDescription } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
 
 
 export default function CarInformations() {
@@ -32,6 +31,7 @@ export default function CarInformations() {
                     </button>
                 </CloseButton>
                 <ModalInternContainer>
+                    
                     <ModalTitle>Renault Sandero - Stepway</ModalTitle>
                     <ModalInformations1>
                         <div>

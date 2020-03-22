@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom'
-
 // Extern Components
 import { Container } from '../../Components/Container/Container';
 
@@ -11,6 +9,8 @@ import { AiOutlinePlus } from 'react-icons/ai'
 
 // Modals
 import InformationModalComponent from '../CarInformations/CarInformations'
+
+import AddCarComponent from '../AddCar/AddCar'
 
 
 // Intern Styles
@@ -45,6 +45,7 @@ import {
 
 export default function Dashboard() {
   const [ InformationModals, setInformationModals] = useState(false)
+  const [ AddCar, setAddCar ] = useState(false)
 
   return (
     <Container>
@@ -227,7 +228,7 @@ export default function Dashboard() {
 
       <ButtonContainer>
         <AddButton>
-          <AiOutlinePlus color='#fff' size={40}/>
+          <AiOutlinePlus color='#fff' size={40} onClick={() => setAddCar(true)}/>
         </AddButton>
       </ButtonContainer>
       
@@ -235,6 +236,14 @@ export default function Dashboard() {
       {
         InformationModals ? (
           <InformationModalComponent/>
+        ) : (
+          null
+        )
+      }
+
+      {
+        AddCar ? (
+          <AddCarComponent/> 
         ) : (
           null
         )

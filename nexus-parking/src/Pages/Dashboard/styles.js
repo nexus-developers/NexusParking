@@ -97,7 +97,6 @@ display: flex;
 
 `
 
-
 export const Card = styled.div`
     width: 400px;
     padding: 10px;
