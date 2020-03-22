@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { Link } from 'react-router-dom'
 
 // Extern Components
 import { Container } from '../../Components/Container/Container';
 
 import { IoIosSearch } from 'react-icons/io'
+
+import { AiOutlinePlus } from 'react-icons/ai'
+
+// Modals
+import InformationModalComponent from '../CarInformations/CarInformations'
 
 
 // Intern Styles
@@ -31,10 +38,14 @@ import {
   FinishButton,
   AreaDivisor,
   Hr,
-  AreaDivisorText
+  AreaDivisorText,
+  ButtonContainer,
+  AddButton
 } from './styles'
 
 export default function Dashboard() {
+  const [ InformationModals, setInformationModals] = useState(false)
+
   return (
     <Container>
       <InternContainer>
@@ -67,15 +78,33 @@ export default function Dashboard() {
               </div>
               <input type="text" placeholder='Digite a placa para buscar o carro...' class="form-control"/>
             </div>
-
             <SearchButton>
               Buscar
             </SearchButton>
           </SearchCamp>
         </Menu>
-      
+
       <CardsContainer>
         <Cards className='row' >
+            <Card className='shadow' onClick={() => setInformationModals(true)}>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+  
             <Card className='shadow'>
               <header>
                   <BadgeElement green/>
@@ -95,6 +124,7 @@ export default function Dashboard() {
               </Divisor>
             </Card>
 
+   
             <Card className='shadow'>
               <header>
                   <BadgeElement green/>
@@ -113,7 +143,26 @@ export default function Dashboard() {
                 </FinishButton>
               </Divisor>
             </Card>
-
+       
+          <Card className='shadow'>
+              <header>
+                  <BadgeElement green/>
+                  <span>Entrada: 14:00h</span>
+              </header>
+              <CarModel>
+                Renault Sandero - Stepway
+              </CarModel>
+              <Divisor>
+                <CarInformations>
+                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                  <CarColor>Cor: Laranja</CarColor>
+                </CarInformations>
+                <FinishButton>
+                    Finalizar
+                </FinishButton>
+              </Divisor>
+            </Card>
+          
             <Card className='shadow'>
               <header>
                   <BadgeElement green/>
@@ -132,54 +181,18 @@ export default function Dashboard() {
                 </FinishButton>
               </Divisor>
             </Card>
-        
-
-        <Card className='shadow'>
-              <header>
-                  <BadgeElement green/>
-                  <span>Entrada: 14:00h</span>
-              </header>
-              <CarModel>
-                Renault Sandero - Stepway
-              </CarModel>
-              <Divisor>
-                <CarInformations>
-                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                  <CarColor>Cor: Laranja</CarColor>
-                </CarInformations>
-                <FinishButton>
-                    Finalizar
-                </FinishButton>
-              </Divisor>
-            </Card>
-
-            <Card className='shadow'>
-              <header>
-                  <BadgeElement green/>
-                  <span>Entrada: 14:00h</span>
-              </header>
-              <CarModel>
-                Renault Sandero - Stepway
-              </CarModel>
-              <Divisor>
-                <CarInformations>
-                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                  <CarColor>Cor: Laranja</CarColor>
-                </CarInformations>
-                <FinishButton>
-                    Finalizar
-                </FinishButton>
-              </Divisor>
-            </Card>
-            </Cards>
+        </Cards>
       </CardsContainer>
-      
+
       <AreaDivisor>
         <Hr/>
         <AreaDivisorText>Isso é tudo</AreaDivisorText>
         <Hr/>
       </AreaDivisor>
 
+
+
+      {/* Veiculos Retirados */}
       <MenuTitleDiv>
         <MenuTitle>
           Carros Recentes
@@ -188,28 +201,44 @@ export default function Dashboard() {
           Exibindo todos que saíram recentimente
         </MenuDescription>
       </MenuTitleDiv>
+
       <CardsContainer>
-        <Cards className='row' >
+        <Cards className='row'>
             <Card className='shadow'>
-              <header>
-                  <BadgeElement finalizado/>
-                  <span>Saída: 18:00h</span>
-              </header>
-              <CarModel>
-                Renault Sandero - Stepway
-              </CarModel>
-              <Divisor>
-                <CarInformations>
-                  <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                  <CarColor>Cor: Laranja</CarColor>
-                </CarInformations>
-                <FinishButton finalizado>
-                    Finalizado
-                </FinishButton>
-              </Divisor>
+                <header>
+                    <BadgeElement finalizado/>
+                    <span>Saída: 18:00h</span>
+                </header>
+                <CarModel>
+                  Renault Sandero - Stepway
+                </CarModel>
+                <Divisor>
+                  <CarInformations>
+                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
+                    <CarColor>Cor: Laranja</CarColor>
+                  </CarInformations>
+                  <FinishButton finalizado>
+                      Finalizado
+                  </FinishButton>
+                </Divisor>
             </Card>
           </Cards>
         </CardsContainer>
+
+      <ButtonContainer>
+        <AddButton>
+          <AiOutlinePlus color='#fff' size={40}/>
+        </AddButton>
+      </ButtonContainer>
+      
+      {/* CarInformationsComponent */}
+      {
+        InformationModals ? (
+          <InformationModalComponent/>
+        ) : (
+          null
+        )
+      }
       </InternContainer>
     </Container>
   );

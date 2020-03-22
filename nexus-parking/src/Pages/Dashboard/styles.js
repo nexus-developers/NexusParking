@@ -105,6 +105,7 @@ export const Card = styled.div`
     border-radius: 4px;
     margin-right: 20px;
     margin-bottom: 20px;
+    cursor: pointer;
 
     &:hover{
         border: 2px solid  #FFA43B;
@@ -186,4 +187,27 @@ export const AreaDivisorText = styled.p`
     margin-top: 3px;
     color: #C4C4C4;
     font-weight: bold;
+`
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+`
+
+export const AddButton = styled.button`
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    background-color: #FFA43B;
+
+    &:hover{
+       background-color: #E68310;
+    }
 `

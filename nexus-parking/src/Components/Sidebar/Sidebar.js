@@ -16,7 +16,7 @@ export default function Sidebar() {
   return (
    <Container className='shadow'>
        <LogoContainer>
-          <img src={Logo}/>
+          <img src={Logo} alt='Logo'/>
        </LogoContainer>
 
        <MenuContainer>
