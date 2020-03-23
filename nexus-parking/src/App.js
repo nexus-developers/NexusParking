@@ -1,13 +1,15 @@
 import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom'
+// import { Provider } from 'react-redux'
 
+// import store from './store'
+
+import Routes from './routes'
+import Sidebar from './Components/Sidebar/Sidebar'
 import Global from './Global/Global'
 
-import  Routes from './routes'
-import Sidebar from './Components/Sidebar/Sidebar'
-
-function App() {
+export default function App() {
   return (
     <>
       <BrowserRouter>
@@ -15,8 +17,9 @@ function App() {
         <Sidebar/>
       </BrowserRouter>
       <Global/>
+
     </>
   );
 }
 
-export default App;
+
