@@ -12,6 +12,8 @@ import InformationModalComponent from '../CarInformations/CarInformations'
 
 import AddCarComponent from '../AddCar/AddCar'
 
+import Payment from '../Payment/Payment'
+
 
 // Intern Styles
 import {
@@ -46,6 +48,7 @@ import {
 export default function Dashboard() {
   const [ InformationModals, setInformationModals] = useState(false)
   const [ AddCar, setAddCar ] = useState(false)
+  const [ payment, setPayment ] = useState(false)
 
   return (
     <Container>
@@ -100,7 +103,9 @@ export default function Dashboard() {
                   <LicensePlate>Placa: PJE - 1234</LicensePlate>
                   <CarColor>Cor: Laranja</CarColor>
                 </CarInformations>
-                <FinishButton>
+                <FinishButton
+                  onClick={() => setPayment(true)}
+                >
                     Finalizar
                 </FinishButton>
               </Divisor>
@@ -244,6 +249,14 @@ export default function Dashboard() {
       {
         AddCar ? (
           <AddCarComponent/> 
+        ) : (
+          null
+        )
+      }
+
+      {
+        payment ? (
+          <Payment/>
         ) : (
           null
         )
