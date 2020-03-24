@@ -29,6 +29,18 @@ export const Title = styled.h1`
     color: #FFA43B;
 `
 
+export const CloseButton = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin:10px 20px 0 0 ;
+
+    button{
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
+`
+
 export const AreaInputs1 = styled.div`
     margin-top: 60px;
     margin-left: 60px;
