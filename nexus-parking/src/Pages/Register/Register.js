@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import Api from '../../Services/Api';
+
 import { 
   Container,
   ModalContainer,
@@ -17,6 +19,25 @@ import {
 import { MdClose } from 'react-icons/md'
 
 class Register extends Component {
+
+  handleRegister = async e => {
+    // e.preventDefault();
+
+    const name = this.refs.name.value;
+    const cnpj = parseInt(this.refs.cnpj.value);
+    const email = this.refs.email.value;
+    const phone = parseInt(this.refs.phone.value);
+
+    const info = { name, cnpj, email, phone }
+    
+    try {
+      await Api.post('/register', info);
+      
+      this.closeModal();
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   closeModal = () => {
     const { dispatch } = this.props;
@@ -54,6 +75,7 @@ class Register extends Component {
                       <h5>Nome:</h5>
                       <input 
                         className='form-control'
+                        ref='name'
                       />
                     </div>
                     <div className='secondInputRegister'>
@@ -69,6 +91,7 @@ class Register extends Component {
                       <input
                         style={{width: '300px'}}
                         className='form-control'
+                        ref='cnpj'
                       />
                     </div>
                     <div className='secondInputRegister'>
@@ -76,6 +99,7 @@ class Register extends Component {
                       <input 
                         style={{width: '500px'}}
                         className='form-control'
+                        ref='email'
                       />
                     </div>
                     <div className='secondInputRegister'>
@@ -83,6 +107,7 @@ class Register extends Component {
                       <input 
                         style={{width: '300px'}}
                         className='form-control'
+                        ref='phone'
                       />
                     </div>
                   </AreaInputs2>
@@ -109,7 +134,9 @@ class Register extends Component {
                           Transferência Bancária
                         </label>
                       </div>
-                      <RegisterButton>
+                      <RegisterButton 
+                        onClick={() => this.handleRegister()}
+                      >
                         Prosseguir
                       </RegisterButton>
                     </Radios>
