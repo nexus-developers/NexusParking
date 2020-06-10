@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
+import Api from '../../Services/Api';
+
 import { 
     Container,
     LoginContainer,
@@ -31,6 +33,40 @@ import CarouselComponent from '../../Components/Carousel/Carousel'
 
 
 class Login extends Component {
+
+    componentDidMount(){
+        this.userLogged();
+    }
+
+    userLogged = () => {
+        const token = localStorage.getItem('token');
+
+        if(token){
+            Api.defaults.headers.authorization = `Barrer ${token}`;
+            const { history } = this.props
+            return history.push('/dashboard');
+        }
+    }
+
+    handleLogin = async e => {
+        const email = this.refs.email.value;
+        const password = this.refs.password.value;
+
+        const info = { email, password }
+
+        try {
+            const response = await Api.post('/session', info);
+
+            Api.defaults.headers.authorization = `Barrer ${response.data.token}`;
+
+            const { history } = this.props
+            history.push('/dashboard')
+
+            localStorage.setItem('token', response.data.token);
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
     openModal = () => {
         const { dispatch } = this.props
@@ -42,6 +78,7 @@ class Login extends Component {
 
     render(){
     const { modalOpen } = this.props
+    // const { history } = this.props
     
         return (
             <Container className=''>
@@ -54,14 +91,18 @@ class Login extends Component {
                             <UserForm>
                                 <label>Usuário:</label>
                                 <small>Digite seu usuário ou e-mail</small>
-                                <input className='form-control'/>
+                                <input className='form-control'
+                                    ref='email'
+                                />
                                 <Link>
                                     Esqueceu o usuário?
                                 </Link>
                             </UserForm>
                             <PasswordForm>
                                 <label>Senha:</label>
-                                <input className='form-control'/>
+                                <input className='form-control'
+                                    ref='password'
+                                />
                                 <Link>
                                     Oops, esqueci minha senha...
                                 </Link>
@@ -69,8 +110,10 @@ class Login extends Component {
 
                         </FormContainer>
 
-                        <Link to='/dashboard'>
-                            <SubmitButton>
+                        <Link>
+                            <SubmitButton
+                                onClick={() => this.handleLogin()}
+                            >
                                 Fazer Login
                             </SubmitButton>
                         </Link>

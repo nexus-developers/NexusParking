@@ -9,6 +9,8 @@ import { IoIosSearch } from 'react-icons/io'
 
 import { AiOutlinePlus } from 'react-icons/ai'
 
+import Api from '../../Services/Api';
+
 // Modals
 import InformationModalComponent from '../CarInformations/CarInformations'
 
@@ -52,6 +54,25 @@ import {
 // const [ payment, setPayment ] = useState(false)
 
 class Dashboard extends Component {
+  state = {
+    vehicles: []
+  }
+
+  componentDidMount(){
+    this.userLogged();
+    this.requestVehicles();
+  }
+
+  userLogged = () => {
+    const token = localStorage.getItem('token');
+    Api.defaults.headers.authorization = `Barrer ${token}`;
+  }
+
+  requestVehicles = async () => {
+    const response = await Api.get('/parking');
+
+    this.setState({ vehicles: response.data })
+  }
 
   addCarModal = () => {
     const { dispatch } = this.props
@@ -73,6 +94,7 @@ class Dashboard extends Component {
   render(){
 
     const { AddCar, InformationModals } = this.props
+    const { vehicles } = this.state;
 
     return (
       <Container>
@@ -114,102 +136,29 @@ class Dashboard extends Component {
 
         <CardsContainer>
           <Cards className='row' >
-              <Card className='shadow' onClick={() => this.informationModal()}>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
+            {
+              vehicles.map(vehicle => 
+                <Card key={vehicle.id_vechicles} className='shadow' onClick={() => this.informationModal()}>
+                  <header>
+                      <BadgeElement green/>
+                      <span>Entrada: {vehicle.date_time}</span>
+                  </header>
+                  <CarModel>
+                    {vehicle.model}
+                  </CarModel>
+                  <Divisor>
+                    <CarInformations>
+                      <LicensePlate>Placa: {vehicle.plate}</LicensePlate>
+                      <CarColor>Cor: {vehicle.color}</CarColor>
+                    </CarInformations>
 
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-    
-              <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-
-    
-              <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-        
-            <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-            
-              <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
+                    <FinishButton>
+                        Finalizar
+                    </FinishButton>
+                  </Divisor>
+                </Card>
+                )
+            }
           </Cards>
         </CardsContainer>
 
