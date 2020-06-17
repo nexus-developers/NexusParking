@@ -11,6 +11,8 @@ import { AiOutlinePlus } from 'react-icons/ai'
 
 import Api from '../../Services/Api';
 
+import { plateMask } from '../../Utils/Mask';
+
 // Modals
 import InformationModalComponent from '../CarInformations/CarInformations'
 
@@ -55,7 +57,8 @@ import {
 
 class Dashboard extends Component {
   state = {
-    vehicles: []
+    vehicles: [],
+    timezone: ''
   }
 
   componentDidMount(){
@@ -141,14 +144,14 @@ class Dashboard extends Component {
                 <Card key={vehicle.id_vechicles} className='shadow' onClick={() => this.informationModal()}>
                   <header>
                       <BadgeElement green/>
-                      <span>Entrada: {vehicle.date_time}</span>
+                      <span>Entrada: {vehicle.date_time}h</span>
                   </header>
                   <CarModel>
                     {vehicle.model}
                   </CarModel>
                   <Divisor>
                     <CarInformations>
-                      <LicensePlate>Placa: {vehicle.plate}</LicensePlate>
+                      <LicensePlate>Placa: {plateMask(vehicle.plate)}</LicensePlate>
                       <CarColor>Cor: {vehicle.color}</CarColor>
                     </CarInformations>
 
