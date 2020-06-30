@@ -7,6 +7,9 @@ import Api from '../../Services/Api';
 // Extern Components
 import { Container, InternContainer } from '../../Components/Container/Container';
 
+//importar masks
+import { plateMask, cleanMask, phoneMask, cpfMask } from '../../Utils/Mask';
+
 // Intern Styles Components
 import {
     ModalContainer,
@@ -22,22 +25,27 @@ import {
 
 import { MdClose } from 'react-icons/md'
 
-class AddCar extends Component {
 
+class AddCar extends Component {
+    
     state = {
         car: false,
-        moto: false
+        moto: false,
+        plate: '',
+        phone: '',
+        cpf: '',
+        counter: true
     }
 
     handleVehicleRegister = async () => {
-        const { car, moto } = this.state;
+        const { car, moto, plate, phone, cpf } = this.state;
+        const plateClean = cleanMask(plate);
         const color = this.refs.color.value;
         const model = this.refs.model.value;
-        const plate = this.refs.plate.value;
         const owner_name = this.refs.owner_name.value;
-        const owner_cpf = this.refs.owner_cpf.value;
+        const owner_cpf = cleanMask(cpf);
         const owner_ddd = '081';
-        const owner_phone = this.refs.owner_phone.value;
+        const owner_phone = cleanMask(phone);
         const owner_email = this.refs.owner_email.value;
         let info = {}
 
@@ -46,7 +54,7 @@ class AddCar extends Component {
                 car, 
                 color, 
                 model, 
-                plate, 
+                plate: plateClean, 
                 owner_name, 
                 owner_cpf,
                 owner_ddd,
@@ -59,7 +67,7 @@ class AddCar extends Component {
                 moto, 
                 color, 
                 model, 
-                plate, 
+                plate: plateClean, 
                 owner_name, 
                 owner_cpf,
                 owner_ddd,
@@ -81,12 +89,23 @@ class AddCar extends Component {
         const { dispatch } = this.props;
       
         dispatch({
-          type: 'CLOSE_CAR_MODAL',
+            type: 'CLOSE_CAR_MODAL'
         })
-      };
+    };
+
+    counterModal = () => {
+        const { dispatch } = this.props;
+        const { counter } = this.state;
+
+        dispatch({
+            type: 'COUNTER',
+            counter
+        })
+    }
 
       render(){
         const { AddCar } = this.props
+        const { plate, phone, cpf } = this.state;
 
         return (
             <>
@@ -116,6 +135,8 @@ class AddCar extends Component {
                                                     <div>
                                                         <h5>CPF:</h5>
                                                         <input 
+                                                            value={cpf} 
+                                                            onChange={e => this.setState({ cpf: cpfMask(e.target.value) })}
                                                             className='form-control'
                                                             ref='owner_cpf'
                                                         />
@@ -132,8 +153,10 @@ class AddCar extends Component {
                                                     <div>
                                                         <h5>Telefone:</h5>
                                                         <input 
+                                                            value={ phone }
+                                                            onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
+                                                            maxLength='10'
                                                             className='form-control'
-                                                            ref='owner_phone'
                                                         />
                                                     </div>
                                                 </Form2>
@@ -151,8 +174,9 @@ class AddCar extends Component {
                                                     <div>
                                                         <h5>Placa:</h5>
                                                         <input 
+                                                            value={ plate }
+                                                            onChange={e => this.setState({ plate: plateMask(e.target.value) })}
                                                             className='form-control'
-                                                            ref='plate'
                                                         />
                                                     </div>
                                                     <div>

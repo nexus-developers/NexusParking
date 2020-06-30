@@ -12,6 +12,9 @@ export default function modal(state = INITIAL_STATE, action) {
         case 'CLOSE_CAR_MODAL':
             return INITIAL_STATE;
 
+        case 'COUNTER':
+            return action.counter;
+
         // case 'INFORMATION_MODAL': 
         //     return [ state = true ];
         // case 'INFORMATION_MODAL_CLOSE':

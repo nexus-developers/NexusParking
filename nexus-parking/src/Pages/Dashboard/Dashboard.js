@@ -11,12 +11,14 @@ import { AiOutlinePlus } from 'react-icons/ai'
 
 import Api from '../../Services/Api';
 
-import { plateMask } from '../../Utils/Mask';
+import { viewPlate } from '../../Utils/Mask';
 
 // Modals
 import InformationModalComponent from '../CarInformations/CarInformations'
 
 import AddCarComponent from '../AddCar/AddCar'
+
+import PaymentComponent from '../Payment/Payment'
 
 // import Payment from '../Payment/Payment'
 
@@ -58,12 +60,22 @@ import {
 class Dashboard extends Component {
   state = {
     vehicles: [],
-    timezone: ''
+    timezone: '',
+    counter: false
   }
 
   componentDidMount(){
     this.userLogged();
     this.requestVehicles();
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.counter){
+      this.requestVehicles();
+    }
+    if(prevProps.Payment){
+      this.requestVehicles();
+    }
   }
 
   userLogged = () => {
@@ -93,10 +105,29 @@ class Dashboard extends Component {
     })
   }
 
+  paymantModal = (id) => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'PAYMENT',
+      id
+    })
+  }
+
+  counterModal = () => {
+    const { dispatch } = this.props;
+    const { counter } = this.state;
+
+    dispatch({
+        type: 'COUNTER',
+        counter
+    })
+}
+
 
   render(){
 
-    const { AddCar, InformationModals } = this.props
+    const { AddCar, InformationModals, counter, Payment } = this.props
     const { vehicles } = this.state;
 
     return (
@@ -151,11 +182,13 @@ class Dashboard extends Component {
                   </CarModel>
                   <Divisor>
                     <CarInformations>
-                      <LicensePlate>Placa: {plateMask(vehicle.plate)}</LicensePlate>
+                      <LicensePlate>Placa: {viewPlate(vehicle.plate)}</LicensePlate>
                       <CarColor>Cor: {vehicle.color}</CarColor>
                     </CarInformations>
 
-                    <FinishButton>
+                    <FinishButton
+                      onClick={() => this.paymantModal(vehicle.id_vechicles)}
+                    >
                         Finalizar
                     </FinishButton>
                   </Divisor>
@@ -228,14 +261,14 @@ class Dashboard extends Component {
           )
         }
 
-        {/* {
+        {
         
-          payment ? (
-            <Payment/>
+          Payment ? (
+            <PaymentComponent/>
           ) : (
             null
           )
-        }  */}
+        } 
 
         </InternContainer>
       </Container>
@@ -246,8 +279,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => ({
   InformationModals: state.information,
   AddCar: state.modal,
-  // payment: state.modal
-
+  counter: state.modal,
+  Payment: state.payment
 });
 
 export default connect(mapStateToProps)(Dashboard)

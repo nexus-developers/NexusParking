@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { Container, InternContainer } from '../../Components/Container/Container';
 
+import Api from '../../Services/Api';
+
 import { 
     PaymentContainer,
     CloseButton,
@@ -19,28 +21,60 @@ import { MdClose } from 'react-icons/md'
 
 class Payment extends Component {
 
+    state = {
+        pay: {},
+        counter: true
+    }
+
+    componentDidMount(){
+        this.requestPayment();
+    }
+
+    requestPayment = async () => {
+        const { id } = this.props;
+
+        const response = await Api.get(`/payment/${id}`);
+
+        this.setState({ pay: response.data });
+    }
+
+    finishPayment = async () => {
+        const { id } = this.props;
+
+        try {
+            await Api.put(`/payment/${id}`);
+
+            this.closeModal()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     closeModal = () => {
         const { dispatch } = this.props;
       
         dispatch({
-          type: 'MODAL_CLOSE',
+          type: 'CLOSE_PAYMENT',
         })
-      };
-
+    };
+    
     render(){
 
-        // const { payment } = this.props
+        const { Payment } = this.props
+        const { pay } = this.state
 
         return (
-            // <>
-            //     {
-            //         payment ? (
+            <>
+                {
+                    Payment ? (
                         <Container>
                             <InternContainer>
                                 <PaymentContainer 
                                     className='shadow'
                                 >
-                                        <CloseButton>
+                                        <CloseButton
+                                            onClick={() => this.closeModal()}
+                                        >
                                             <button>
                                                 <MdClose 
                                                     color='#000'  
@@ -48,13 +82,13 @@ class Payment extends Component {
                                                     /> 
                                             </button>
                                         </CloseButton>
-                                    <Title>Renault Sandero - Stepway</Title>
-                                    <h1>Valor Total</h1>
-                                    <h5>R$ 40,00</h5>
-                                    <p>Horário de entrada: 13:00h</p>
-                                    <p>Horário de saída: 18:00h</p>
-
-                                    <ValueHour>Valor por hora: R$ 6.00</ValueHour>
+                                        <Title>{pay.model}</Title>
+                                        <h1>Valor Total</h1>
+                                        <h5>R$ {pay.value},00</h5>
+                                        <p>Horário de entrada: {pay.start}h</p>
+                                        <p>Horário de saída: {pay.end}h</p>
+                
+                                        <ValueHour>Valor por hora: R$ {pay.price}.00</ValueHour>
 
                                     <PaymentForm>
                                         <h3>Formas de Pagamento:</h3>
@@ -68,24 +102,27 @@ class Payment extends Component {
                                     </PaymentForm>
 
                                     <PaymentButtonContainer>
-                                        <PaymentButton pago>
+                                        <PaymentButton pago
+                                            onClick={() => this.finishPayment()}
+                                        >
                                             Pagamento Processado!
                                         </PaymentButton>
                                     </PaymentButtonContainer>
                                 </PaymentContainer>
                             </InternContainer>
                         </Container>
-            //         ) : (
-            //             null
-            //         )
-            //     }
-            // </>
+                    ) : (
+                        null
+                    )
+                }
+            </>
         );
     }
 }
 
-// const mapStateToProps = state => ({
-//     payment: state.modal
-//   });
+const mapStateToProps = state => ({
+    Payment: state.payment[0],
+    id: state.payment[1]
+  });
   
-//   export default connect(mapStateToProps)(Pay)
+  export default connect(mapStateToProps)(Payment)
