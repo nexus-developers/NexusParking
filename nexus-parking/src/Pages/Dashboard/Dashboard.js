@@ -52,6 +52,8 @@ import {
   ButtonContainer,
   AddButton
 } from './styles'
+import { Route } from 'react-router-dom';
+import Routes from '../../routes';
 
 // const [ InformationModals, setInformationModals] = useState(false)
 // const [ AddCar, setAddCar ] = useState(false)
@@ -60,13 +62,14 @@ import {
 class Dashboard extends Component {
   state = {
     vehicles: [],
+    vehiclesPaid: [],
     timezone: '',
     counter: false
   }
 
-  componentDidMount(){
-    this.userLogged();
-    this.requestVehicles();
+  async componentDidMount(){
+    await this.userLogged();
+    await this.requestVehicles();
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -78,15 +81,21 @@ class Dashboard extends Component {
     }
   }
 
-  userLogged = () => {
+  userLogged = async () => {
     const token = localStorage.getItem('token');
-    Api.defaults.headers.authorization = `Barrer ${token}`;
+    if(token){
+      Api.defaults.headers.authorization = `Barrer ${token}`;
+    }
   }
 
   requestVehicles = async () => {
+    //veiculos a finalizarem
     const response = await Api.get('/parking');
-
     this.setState({ vehicles: response.data })
+
+    //veiculos finalizados
+    const responsePaid = await Api.get('/paid');
+    this.setState({ vehiclesPaid: responsePaid.data });
   }
 
   addCarModal = () => {
@@ -128,7 +137,7 @@ class Dashboard extends Component {
   render(){
 
     const { AddCar, InformationModals, counter, Payment } = this.props
-    const { vehicles } = this.state;
+    const { vehicles, vehiclesPaid } = this.state;
 
     return (
       <Container>
@@ -218,24 +227,28 @@ class Dashboard extends Component {
 
         <CardsContainer>
           <Cards className='row'>
-              <Card className='shadow'>
-                  <header>
-                      <BadgeElement finalizado/>
-                      <span>Saída: 18:00h</span>
-                  </header>
-                  <CarModel>
-                    Renault Sandero - Stepway
-                  </CarModel>
-                  <Divisor>
-                    <CarInformations>
-                      <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                      <CarColor>Cor: Laranja</CarColor>
-                    </CarInformations>
-                    <FinishButton finalizado>
-                        Finalizado
-                    </FinishButton>
-                  </Divisor>
-              </Card>
+            {
+              vehiclesPaid.map(paid => 
+                <Card key={paid.id_vechicles} className='shadow'>
+                    <header>
+                        <BadgeElement finalizado/>
+                        <span>Saída: {paid.date_time}h</span>
+                    </header>
+                    <CarModel>
+                      {paid.model}
+                    </CarModel>
+                    <Divisor>
+                      <CarInformations>
+                        <LicensePlate>Placa: {paid.plate}</LicensePlate>
+                        <CarColor>Cor: {paid.color}</CarColor>
+                      </CarInformations>
+                      <FinishButton finalizado>
+                          Finalizado
+                      </FinishButton>
+                    </Divisor>
+                </Card>
+                )
+            }
             </Cards>
           </CardsContainer>
 

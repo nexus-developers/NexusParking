@@ -1,7 +1,5 @@
 import React from 'react';
 
-import 'dotenv/config';
-
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -15,8 +13,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes/>
         <Sidebar/>
+        <Routes/>
       </BrowserRouter>
       <Global/>
     </Provider>

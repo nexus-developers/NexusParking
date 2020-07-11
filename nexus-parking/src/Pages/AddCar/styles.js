@@ -5,7 +5,6 @@ export const ModalContainer = styled.div`
     height: 80%;
     background-color: #fff;
     border-radius: 5px;
-
 `
 export const CloseButton = styled.div`
     display: flex;

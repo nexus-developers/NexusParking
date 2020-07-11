@@ -155,7 +155,7 @@ class AddCar extends Component {
                                                         <input 
                                                             value={ phone }
                                                             onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
-                                                            maxLength='10'
+                                                            maxLength='15'
                                                             className='form-control'
                                                         />
                                                     </div>
@@ -176,6 +176,7 @@ class AddCar extends Component {
                                                         <input 
                                                             value={ plate }
                                                             onChange={e => this.setState({ plate: plateMask(e.target.value) })}
+                                                            maxLength='8'
                                                             className='form-control'
                                                         />
                                                     </div>

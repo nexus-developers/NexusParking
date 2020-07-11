@@ -44,7 +44,7 @@ class Login extends Component {
         if(token){
             Api.defaults.headers.authorization = `Barrer ${token}`;
             const { history } = this.props
-            return history.push('/dashboard');
+            return history.push(`/dashboard`);
         }
     }
 

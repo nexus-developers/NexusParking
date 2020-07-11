@@ -57,6 +57,12 @@ class Payment extends Component {
           type: 'CLOSE_PAYMENT',
         })
     };
+
+    wppNumber = async (phone, price) => {
+        const message = `Valor pago no estacionamento ${price}`
+        window.open(`https://api.whatsapp.com/send?phone=55${phone}&text=${encodeURI(message)}`);
+        this.finishPayment();
+    }
     
     render(){
 
@@ -103,7 +109,7 @@ class Payment extends Component {
 
                                     <PaymentButtonContainer>
                                         <PaymentButton pago
-                                            onClick={() => this.finishPayment()}
+                                            onClick={() => this.wppNumber(pay.phone, pay.value)}
                                         >
                                             Pagamento Processado!
                                         </PaymentButton>

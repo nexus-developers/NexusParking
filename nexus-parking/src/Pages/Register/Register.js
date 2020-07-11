@@ -16,19 +16,25 @@ import {
   RegisterButton
 } from './styles';
 
+import { cpfMask, phoneMask, cleanMask } from '../../Utils/Mask';
+
 import { MdClose } from 'react-icons/md'
 
 class Register extends Component {
+  state = {
+    cpf: '',
+    phone: ''
+  }
 
   handleRegister = async e => {
-    // e.preventDefault();
+    const { cpf, phone } = this.state;
 
     const name = this.refs.name.value;
-    const cnpj = parseInt(this.refs.cnpj.value);
+    const cnpj = cleanMask(cpf)
     const email = this.refs.email.value;
-    const phone = parseInt(this.refs.phone.value);
+    const cleanPhone = cleanMask(phone)
 
-    const info = { name, cnpj, email, phone }
+    const info = { name, cnpj, email, phone: cleanPhone }
     
     try {
       await Api.post('/register', info);
@@ -50,6 +56,7 @@ class Register extends Component {
     render(){
 
       const { modalClose } = this.props 
+      const { cpf, phone } = this.state;
 
       return (
         <>
@@ -89,9 +96,12 @@ class Register extends Component {
                   <div>
                       <h5>CPF/CNPJ:</h5>
                       <input
+                        value={cpf}
+                        onChange={e => this.setState({ cpf: cpfMask(e.target.value) })}
                         style={{width: '300px'}}
                         className='form-control'
                         ref='cnpj'
+                        maxLength='18'
                       />
                     </div>
                     <div className='secondInputRegister'>
@@ -105,9 +115,12 @@ class Register extends Component {
                     <div className='secondInputRegister'>
                       <h5>Telefone:</h5>
                       <input 
+                        value={ phone }
+                        onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
                         style={{width: '300px'}}
                         className='form-control'
                         ref='phone'
+                        maxLength='15'
                       />
                     </div>
                   </AreaInputs2>
