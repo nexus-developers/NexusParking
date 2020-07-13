@@ -32,9 +32,10 @@ class Register extends Component {
     const name = this.refs.name.value;
     const cnpj = cleanMask(cpf)
     const email = this.refs.email.value;
-    const cleanPhone = cleanMask(phone)
+    const cleanPhone = cleanMask(phone);
+    const companie_name = this.refs.companie.value;
 
-    const info = { name, cnpj, email, phone: cleanPhone }
+    const info = { name, cnpj, email, phone: cleanPhone, companie_name }
     
     try {
       await Api.post('/register', info);
@@ -89,6 +90,7 @@ class Register extends Component {
                       <h5>Nome da Empresa:</h5>
                       <input 
                         className='form-control'
+                        ref='companie'
                       />
                     </div>
                   </AreaInputs1>

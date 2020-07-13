@@ -21,7 +21,6 @@ export const LoginContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 2;
 
     h5{
         margin: 50px 0 10px 0;
