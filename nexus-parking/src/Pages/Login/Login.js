@@ -50,9 +50,11 @@ class Login extends Component {
 
     handleLogin = async e => {
         const email = this.refs.email.value;
-        const password = this.refs.password.value;
+        const password = this.refs.password.value.toString();
 
         const info = { email, password }
+
+        console.log(info)
 
         try {
             const response = await Api.post('/session', info);
@@ -102,6 +104,7 @@ class Login extends Component {
                                 <label>Senha:</label>
                                 <input className='form-control'
                                     ref='password'
+                                    type='password'
                                 />
                                 <Link>
                                     Oops, esqueci minha senha...
