@@ -13,8 +13,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes/>
         <Sidebar/>
+        <Routes/>
       </BrowserRouter>
       <Global/>
     </Provider>

@@ -9,10 +9,16 @@ import { IoIosSearch } from 'react-icons/io'
 
 import { AiOutlinePlus } from 'react-icons/ai'
 
+import Api from '../../Services/Api';
+
+import { viewPlate } from '../../Utils/Mask';
+
 // Modals
 import InformationModalComponent from '../CarInformations/CarInformations'
 
 import AddCarComponent from '../AddCar/AddCar'
+
+import PaymentComponent from '../Payment/Payment'
 
 // import Payment from '../Payment/Payment'
 
@@ -46,12 +52,51 @@ import {
   ButtonContainer,
   AddButton
 } from './styles'
+import { Route } from 'react-router-dom';
+import Routes from '../../routes';
 
 // const [ InformationModals, setInformationModals] = useState(false)
 // const [ AddCar, setAddCar ] = useState(false)
 // const [ payment, setPayment ] = useState(false)
 
 class Dashboard extends Component {
+  state = {
+    vehicles: [],
+    vehiclesPaid: [],
+    timezone: '',
+    counter: false
+  }
+
+  async componentDidMount(){
+    await this.userLogged();
+    await this.requestVehicles();
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.counter){
+      this.requestVehicles();
+    }
+    if(prevProps.Payment){
+      this.requestVehicles();
+    }
+  }
+
+  userLogged = async () => {
+    const token = localStorage.getItem('token');
+    if(token){
+      Api.defaults.headers.authorization = `Barrer ${token}`;
+    }
+  }
+
+  requestVehicles = async () => {
+    //veiculos a finalizarem
+    const response = await Api.get('/parking');
+    this.setState({ vehicles: response.data })
+
+    //veiculos finalizados
+    const responsePaid = await Api.get('/paid');
+    this.setState({ vehiclesPaid: responsePaid.data });
+  }
 
   addCarModal = () => {
     const { dispatch } = this.props
@@ -69,10 +114,30 @@ class Dashboard extends Component {
     })
   }
 
+  paymantModal = (id) => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'PAYMENT',
+      id
+    })
+  }
+
+  counterModal = () => {
+    const { dispatch } = this.props;
+    const { counter } = this.state;
+
+    dispatch({
+        type: 'COUNTER',
+        counter
+    })
+}
+
 
   render(){
 
-    const { AddCar, InformationModals } = this.props
+    const { AddCar, InformationModals, counter, Payment } = this.props
+    const { vehicles, vehiclesPaid } = this.state;
 
     return (
       <Container>
@@ -114,102 +179,31 @@ class Dashboard extends Component {
 
         <CardsContainer>
           <Cards className='row' >
-              <Card className='shadow' onClick={() => this.informationModal()}>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
+            {
+              vehicles.map(vehicle => 
+                <Card key={vehicle.id_vechicles} className='shadow' onClick={() => this.informationModal()}>
+                  <header>
+                      <BadgeElement green/>
+                      <span>Entrada: {vehicle.date_time}h</span>
+                  </header>
+                  <CarModel>
+                    {vehicle.model}
+                  </CarModel>
+                  <Divisor>
+                    <CarInformations>
+                      <LicensePlate>Placa: {viewPlate(vehicle.plate)}</LicensePlate>
+                      <CarColor>Cor: {vehicle.color}</CarColor>
+                    </CarInformations>
 
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-    
-              <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-
-    
-              <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-        
-            <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
-            
-              <Card className='shadow'>
-                <header>
-                    <BadgeElement green/>
-                    <span>Entrada: 14:00h</span>
-                </header>
-                <CarModel>
-                  Renault Sandero - Stepway
-                </CarModel>
-                <Divisor>
-                  <CarInformations>
-                    <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                    <CarColor>Cor: Laranja</CarColor>
-                  </CarInformations>
-                  <FinishButton>
-                      Finalizar
-                  </FinishButton>
-                </Divisor>
-              </Card>
+                    <FinishButton
+                      onClick={() => this.paymantModal(vehicle.id_vechicles)}
+                    >
+                        Finalizar
+                    </FinishButton>
+                  </Divisor>
+                </Card>
+                )
+            }
           </Cards>
         </CardsContainer>
 
@@ -233,24 +227,28 @@ class Dashboard extends Component {
 
         <CardsContainer>
           <Cards className='row'>
-              <Card className='shadow'>
-                  <header>
-                      <BadgeElement finalizado/>
-                      <span>Saída: 18:00h</span>
-                  </header>
-                  <CarModel>
-                    Renault Sandero - Stepway
-                  </CarModel>
-                  <Divisor>
-                    <CarInformations>
-                      <LicensePlate>Placa: PJE - 1234</LicensePlate>
-                      <CarColor>Cor: Laranja</CarColor>
-                    </CarInformations>
-                    <FinishButton finalizado>
-                        Finalizado
-                    </FinishButton>
-                  </Divisor>
-              </Card>
+            {
+              vehiclesPaid.map(paid => 
+                <Card key={paid.id_vechicles} className='shadow'>
+                    <header>
+                        <BadgeElement finalizado/>
+                        <span>Saída: {paid.date_time}h</span>
+                    </header>
+                    <CarModel>
+                      {paid.model}
+                    </CarModel>
+                    <Divisor>
+                      <CarInformations>
+                        <LicensePlate>Placa: {paid.plate}</LicensePlate>
+                        <CarColor>Cor: {paid.color}</CarColor>
+                      </CarInformations>
+                      <FinishButton finalizado>
+                          Finalizado
+                      </FinishButton>
+                    </Divisor>
+                </Card>
+                )
+            }
             </Cards>
           </CardsContainer>
 
@@ -276,14 +274,14 @@ class Dashboard extends Component {
           )
         }
 
-        {/* {
+        {
         
-          payment ? (
-            <Payment/>
+          Payment ? (
+            <PaymentComponent/>
           ) : (
             null
           )
-        }  */}
+        } 
 
         </InternContainer>
       </Container>
@@ -294,8 +292,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => ({
   InformationModals: state.information,
   AddCar: state.modal,
-  // payment: state.modal
-
+  counter: state.modal,
+  Payment: state.payment
 });
 
 export default connect(mapStateToProps)(Dashboard)

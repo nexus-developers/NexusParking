@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import Api from '../../Services/Api';
+
 import { 
   Container,
   ModalContainer,
@@ -14,9 +16,35 @@ import {
   RegisterButton
 } from './styles';
 
+import { cpfMask, phoneMask, cleanMask } from '../../Utils/Mask';
+
 import { MdClose } from 'react-icons/md'
 
 class Register extends Component {
+  state = {
+    cpf: '',
+    phone: ''
+  }
+
+  handleRegister = async e => {
+    const { cpf, phone } = this.state;
+
+    const name = this.refs.name.value;
+    const cnpj = cleanMask(cpf)
+    const email = this.refs.email.value;
+    const cleanPhone = cleanMask(phone);
+    const companie_name = this.refs.companie.value;
+
+    const info = { name, cnpj, email, phone: cleanPhone, companie_name }
+    
+    try {
+      await Api.post('/register', info);
+      
+      this.closeModal();
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   closeModal = () => {
     const { dispatch } = this.props;
@@ -29,6 +57,7 @@ class Register extends Component {
     render(){
 
       const { modalClose } = this.props 
+      const { cpf, phone } = this.state;
 
       return (
         <>
@@ -54,12 +83,14 @@ class Register extends Component {
                       <h5>Nome:</h5>
                       <input 
                         className='form-control'
+                        ref='name'
                       />
                     </div>
                     <div className='secondInputRegister'>
                       <h5>Nome da Empresa:</h5>
                       <input 
                         className='form-control'
+                        ref='companie'
                       />
                     </div>
                   </AreaInputs1>
@@ -67,8 +98,12 @@ class Register extends Component {
                   <div>
                       <h5>CPF/CNPJ:</h5>
                       <input
+                        value={cpf}
+                        onChange={e => this.setState({ cpf: cpfMask(e.target.value) })}
                         style={{width: '300px'}}
                         className='form-control'
+                        ref='cnpj'
+                        maxLength='18'
                       />
                     </div>
                     <div className='secondInputRegister'>
@@ -76,13 +111,18 @@ class Register extends Component {
                       <input 
                         style={{width: '500px'}}
                         className='form-control'
+                        ref='email'
                       />
                     </div>
                     <div className='secondInputRegister'>
                       <h5>Telefone:</h5>
                       <input 
+                        value={ phone }
+                        onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
                         style={{width: '300px'}}
                         className='form-control'
+                        ref='phone'
+                        maxLength='15'
                       />
                     </div>
                   </AreaInputs2>
@@ -109,7 +149,9 @@ class Register extends Component {
                           Transferência Bancária
                         </label>
                       </div>
-                      <RegisterButton>
+                      <RegisterButton 
+                        onClick={() => this.handleRegister()}
+                      >
                         Prosseguir
                       </RegisterButton>
                     </Radios>

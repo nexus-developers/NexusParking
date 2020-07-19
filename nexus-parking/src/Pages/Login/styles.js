@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    position: fixed;
+    display: flex;
+    flex-direction: row;
 `;
 
 export const SmallText = styled.small`
