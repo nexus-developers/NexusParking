@@ -52,8 +52,6 @@ import {
   ButtonContainer,
   AddButton
 } from './styles'
-import { Route } from 'react-router-dom';
-import Routes from '../../routes';
 
 // const [ InformationModals, setInformationModals] = useState(false)
 // const [ AddCar, setAddCar ] = useState(false)
@@ -136,7 +134,7 @@ class Dashboard extends Component {
 
   render(){
 
-    const { AddCar, InformationModals, counter, Payment } = this.props
+    const { AddCar, InformationModals, Payment } = this.props
     const { vehicles, vehiclesPaid } = this.state;
 
     return (
