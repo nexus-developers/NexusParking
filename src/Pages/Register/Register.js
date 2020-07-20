@@ -38,7 +38,7 @@ class Register extends Component {
     const info = { name, cnpj, email, phone: cleanPhone, companie_name }
     
     try {
-      await Api.post('/register', info);
+      await Api.post('register', info);
       
       this.closeModal();
     } catch (error) {
