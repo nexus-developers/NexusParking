@@ -7,7 +7,8 @@ export const Container = styled.div`
 
 // Modal Container
 export const InternContainer = styled.div`
-  position: fixed;
+  position: absolute;
+  z-index: 20;
   top: 0;
   left: 0;
   right: 0;

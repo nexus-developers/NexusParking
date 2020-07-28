@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
 
+import moment from 'moment-timezone';
+
 import { Container, InternContainer } from '../../Components/Container/Container';
 
 import Api from '../../Services/Api';
@@ -91,8 +93,8 @@ class Payment extends Component {
                                         <Title>{pay.model}</Title>
                                         <h1>Valor Total</h1>
                                         <h5>R$ {pay.value},00</h5>
-                                        <p>Horário de entrada: {pay.start}h</p>
-                                        <p>Horário de saída: {pay.end}h</p>
+                                        <p>Horário de entrada: {moment.tz(pay.start, "America/Sao_Paulo").format('HH:mm')}h</p>
+                                        <p>Horário de saída: {moment.tz(pay.end, "America/Sao_Paulo").format('HH:mm')}h</p>
                 
                                         <ValueHour>Valor por hora: R$ {pay.price}.00</ValueHour>
 
