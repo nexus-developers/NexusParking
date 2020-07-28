@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import moment from 'moment';
+import 'moment/locale/pt-br'
 
 // Extern Components
 import { Container } from '../../Components/Container/Container';
@@ -140,6 +141,7 @@ class Dashboard extends Component {
 
     const { AddCar, InformationModals, Payment, Report } = this.props
     const { vehicles, vehiclesPaid } = this.state;
+    moment.locale('pt-br')
 
     return (
       <Container>
@@ -186,7 +188,7 @@ class Dashboard extends Component {
                 <Card key={vehicle.id_vechicles} className='shadow' onClick={() => this.informationModal()}>
                   <header>
                       <BadgeElement green/>
-                      <span>Entrada: {moment(vehicle.date_time).tz("America/Sao_Paulo").format('HH:mm')}h</span>
+                      <span>Entrada: {moment(vehicle.date_time).tz("America/Sao_Paulo").format('LT')}h</span>
                   </header>
                   <CarModel>
                     {vehicle.model}
