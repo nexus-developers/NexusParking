@@ -56,8 +56,6 @@ import {
   ButtonContainer,
   AddButton
 } from './styles'
-import { Route } from 'react-router-dom';
-import Routes from '../../routes';
 
 // const [ InformationModals, setInformationModals] = useState(false)
 // const [ AddCar, setAddCar ] = useState(false)
