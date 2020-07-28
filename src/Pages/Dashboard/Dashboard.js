@@ -142,6 +142,7 @@ class Dashboard extends Component {
     const { AddCar, InformationModals, Payment, Report } = this.props
     const { vehicles, vehiclesPaid } = this.state;
     moment.locale('pt-br')
+    console.log(vehicles)
 
     return (
       <Container>
