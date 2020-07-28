@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
 
-import moment from 'moment-timezone';
+import moment from 'moment';
 
 // Extern Components
 import { Container } from '../../Components/Container/Container';
@@ -186,7 +186,7 @@ class Dashboard extends Component {
                 <Card key={vehicle.id_vechicles} className='shadow' onClick={() => this.informationModal()}>
                   <header>
                       <BadgeElement green/>
-                      <span>Entrada: {moment.tz(vehicle.date_time, "America/Sao_Paulo").format('HH:mm')}h</span>
+                      <span>Entrada: {moment(vehicle.date_time).tz("America/Sao_Paulo").format('HH:mm')}h</span>
                   </header>
                   <CarModel>
                     {vehicle.model}
