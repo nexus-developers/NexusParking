@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
 
+import moment from 'moment-timezone';
+
 // Extern Components
 import { Container } from '../../Components/Container/Container';
 
@@ -19,6 +21,8 @@ import InformationModalComponent from '../CarInformations/CarInformations'
 import AddCarComponent from '../AddCar/AddCar'
 
 import PaymentComponent from '../Payment/Payment'
+
+import Report from '../../Pages/Reports/Report';
 
 // import Payment from '../Payment/Payment'
 
@@ -136,7 +140,7 @@ class Dashboard extends Component {
 
   render(){
 
-    const { AddCar, InformationModals, counter, Payment } = this.props
+    const { AddCar, InformationModals, Payment, Report } = this.props
     const { vehicles, vehiclesPaid } = this.state;
 
     return (
@@ -184,7 +188,7 @@ class Dashboard extends Component {
                 <Card key={vehicle.id_vechicles} className='shadow' onClick={() => this.informationModal()}>
                   <header>
                       <BadgeElement green/>
-                      <span>Entrada: {vehicle.date_time}h</span>
+                      <span>Entrada: {moment.tz(vehicle.date_time, "America/Sao_Paulo").format('HH:mm')}h</span>
                   </header>
                   <CarModel>
                     {vehicle.model}
@@ -232,7 +236,7 @@ class Dashboard extends Component {
                 <Card key={paid.id_vechicles} className='shadow'>
                     <header>
                         <BadgeElement finalizado/>
-                        <span>Saída: {paid.date_time}h</span>
+                        <span>Saída: {moment.tz(paid.date_time, "America/Sao_Paulo").format('HH:mm')}h</span>
                     </header>
                     <CarModel>
                       {paid.model}
@@ -283,6 +287,16 @@ class Dashboard extends Component {
           )
         } 
 
+        {/* {
+        
+          Report ? (
+            <Report/>
+          ) : (
+            null
+          )
+        }  */}
+
+
         </InternContainer>
       </Container>
     );
@@ -293,7 +307,8 @@ const mapStateToProps = state => ({
   InformationModals: state.information,
   AddCar: state.modal,
   counter: state.modal,
-  Payment: state.payment
+  Payment: state.payment,
+  Report: state.reports
 });
 
 export default connect(mapStateToProps)(Dashboard)
