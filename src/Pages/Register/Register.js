@@ -100,7 +100,7 @@ class Register extends Component {
                       <input
                         value={cpf}
                         onChange={e => this.setState({ cpf: cpfMask(e.target.value) })}
-                        style={{width: '300px'}}
+                        style={{width: '100%'}}
                         className='form-control'
                         ref='cnpj'
                         maxLength='18'
@@ -109,7 +109,7 @@ class Register extends Component {
                     <div className='secondInputRegister'>
                       <h5>E-mail:</h5>
                       <input 
-                        style={{width: '500px'}}
+                        style={{width: '100%'}}
                         className='form-control'
                         ref='email'
                       />
@@ -119,7 +119,7 @@ class Register extends Component {
                       <input 
                         value={ phone }
                         onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
-                        style={{width: '300px'}}
+                        style={{width: '100%'}}
                         className='form-control'
                         ref='phone'
                         maxLength='15'

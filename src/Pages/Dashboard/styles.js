@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const InternContainer = styled.div`
     margin-left: 40px;
     margin-top: 20px;
-    /* overflow-x: hidden; */
 `
 
 export const Title = styled.h1`

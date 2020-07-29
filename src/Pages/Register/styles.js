@@ -44,15 +44,18 @@ export const CloseButton = styled.div`
 export const AreaInputs1 = styled.div`
     margin-top: 60px;
     margin-left: 60px;
+    margin-right: 60px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     .secondInputRegister{
         margin-left: 100px;
     }
 
     div{
-        
+        width: 100%;
 
         h5{
             margin-bottom: 20px;
@@ -60,7 +63,7 @@ export const AreaInputs1 = styled.div`
         }
 
         input{
-            width: 550px;
+            width: 100%;
         }
     }
 `
@@ -68,15 +71,18 @@ export const AreaInputs1 = styled.div`
 export const AreaInputs2 = styled.div`
     margin-top: 60px;
     margin-left: 60px;
+    margin-right: 60px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     .secondInputRegister{
         margin-left: 50px;
     }
 
     div{
-        
+        width: 100%;
 
         h5{
             margin-bottom: 20px;
@@ -87,11 +93,20 @@ export const AreaInputs2 = styled.div`
 export const AreaInputs3 = styled.div`
     margin-top: 60px;
     margin-left: 60px;
+    margin-right: 60px;
     display: flex;
     flex-direction: column;
 
     h5{
         margin-bottom: 20px;
+    }
+
+    @media(min-width: 1920px){
+        flex-direction: row;
+        
+        h5{
+            margin-bottom: 0px;
+        }
     }
 `
 

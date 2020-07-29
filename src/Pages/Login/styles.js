@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 `;
 
 export const SmallText = styled.small`
-display: flex;
-    margin-top: 50px;
+    display: flex;
+    /* margin-top: 50px;  */
+    margin-top: 12.5%;
     justify-content: flex-end;
     align-items: flex-end;
     padding: 15px;
@@ -23,7 +27,7 @@ export const LoginContainer = styled.div`
     align-items: center;
 
     h5{
-        margin: 50px 0 10px 0;
+        margin: 5% 0 10px 0;
         font-size: 15px;
         color: #424242;
     }
@@ -32,14 +36,16 @@ export const LoginContainer = styled.div`
 export const LogoContainer = styled.div`
     img{
         width: 400px;
-        margin-top: 30px;
+        /* margin-top: 30px; */
+        margin-top: 7.5%;
     }
     `
 
 export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 80px;
+    /* margin-top: 80px; */
+    margin-top: 20%;
     
     label{
         color: #FFA43B;
@@ -79,7 +85,9 @@ export const PasswordForm = styled.div`
 
 export const SubmitButton = styled.button`
     width: 400px;
-    height: 45px;
+    /* height: 45px; */
+    padding-top: 3%;
+    padding-bottom: 3%;
     background-color: #FFA43B;
     margin-top: 40px;
     border: none;
@@ -90,12 +98,18 @@ export const SubmitButton = styled.button`
 
 export const RegisterButton = styled.button`
     width: 400px;
-    height: 45px;
+    /* height: 45px; */
+    padding-top: 3%;
+    padding-bottom: 3%;
     background-color: #fff;
     border: 2px solid #FFA43B;
     border-radius: 4px;
     color: #FFA43B;
     font-weight: bold;
+    @media(min-width: 1920px) {
+        padding-top: 1%;
+        padding-bottom: 1%;;
+    }
     `
 
 export const CarouselContainer = styled.div`
