@@ -27,7 +27,7 @@ import { MdClose } from 'react-icons/md'
 
 
 class AddCar extends Component {
-    
+
     state = {
         car: false,
         moto: false,
@@ -49,26 +49,26 @@ class AddCar extends Component {
         const owner_email = this.refs.owner_email.value;
         let info = {}
 
-        if(car){
-            info = { 
-                car, 
-                color, 
-                model, 
-                plate: plateClean, 
-                owner_name, 
+        if (car) {
+            info = {
+                car,
+                color,
+                model,
+                plate: plateClean,
+                owner_name,
                 owner_cpf,
                 owner_ddd,
                 owner_phone,
                 owner_email
             }
         }
-        else{
-            info = { 
-                moto, 
-                color, 
-                model, 
-                plate: plateClean, 
-                owner_name, 
+        else {
+            info = {
+                moto,
+                color,
+                model,
+                plate: plateClean,
+                owner_name,
                 owner_cpf,
                 owner_ddd,
                 owner_phone,
@@ -87,7 +87,7 @@ class AddCar extends Component {
 
     closeModal = () => {
         const { dispatch } = this.props;
-      
+
         dispatch({
             type: 'CLOSE_CAR_MODAL'
         })
@@ -103,137 +103,137 @@ class AddCar extends Component {
         })
     }
 
-      render(){
+    render() {
         const { AddCar } = this.props
         const { plate, phone, cpf } = this.state;
 
         return (
             <>
                 {
-                  AddCar ? (
+                    AddCar ? (
                         <Container>
                             <InternContainer>
-                                    <ModalContainer className='shadow'>
-                                        <InternModalContainer>
-                                            <CloseButton>
-                                                <button
-                                                    onClick={() => this.closeModal()}
-                                                >
-                                                    <MdClose color='#000'  size={25} /> 
-                                                </button>
-                                            </CloseButton>
-                                                <Title>Cadastro de Veículos</Title> 
-                                            <FormAddClient>
-                                                <Form1>
-                                                    <div>
-                                                        <h5>Nome do Proprietário:</h5>
-                                                        <input 
-                                                            className='form-control'
-                                                            ref='owner_name'
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <h5>CPF:</h5>
-                                                        <input 
-                                                            value={cpf} 
-                                                            onChange={e => this.setState({ cpf: cpfMask(e.target.value) })}
-                                                            className='form-control'
-                                                            ref='owner_cpf'
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <h5>E-mail:</h5>
-                                                        <input 
-                                                            className='form-control'
-                                                            ref='owner_email'
-                                                        />
-                                                    </div>
-                                                </Form1>
-                                                <Form2>
-                                                    <div>
-                                                        <h5>Telefone:</h5>
-                                                        <input 
-                                                            value={ phone }
-                                                            onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
-                                                            maxLength='15'
-                                                            className='form-control'
-                                                        />
-                                                    </div>
-                                                </Form2>
+                                <ModalContainer className='shadow'>
+                                    <InternModalContainer>
+                                        <CloseButton>
+                                            <button
+                                                onClick={() => this.closeModal()}
+                                            >
+                                                <MdClose color='#000' size={25} />
+                                            </button>
+                                        </CloseButton>
+                                        <Title>Cadastro de Veículos</Title>
+                                        <FormAddClient>
+                                            <Form1>
+                                                <div>
+                                                    <h5>Nome do Proprietário:</h5>
+                                                    <input
+                                                        className='form-control'
+                                                        ref='owner_name'
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h5>CPF:</h5>
+                                                    <input
+                                                        value={cpf}
+                                                        onChange={e => this.setState({ cpf: cpfMask(e.target.value) })}
+                                                        className='form-control'
+                                                        ref='owner_cpf'
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h5>E-mail:</h5>
+                                                    <input
+                                                        className='form-control'
+                                                        ref='owner_email'
+                                                    />
+                                                </div>
+                                            </Form1>
+                                            <Form2>
+                                                <div>
+                                                    <h5>Telefone:</h5>
+                                                    <input
+                                                        value={phone}
+                                                        onChange={e => this.setState({ phone: phoneMask(e.target.value) })}
+                                                        maxLength='15'
+                                                        className='form-control'
+                                                    />
+                                                </div>
+                                            </Form2>
 
-                                                <hr/>
+                                            <hr />
 
-                                                <Form1>
-                                                    <div>
-                                                        <h5>Modelo:</h5>
-                                                        <input 
-                                                            className='form-control'
-                                                            ref='model'
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <h5>Placa:</h5>
-                                                        <input 
-                                                            value={ plate }
-                                                            onChange={e => this.setState({ plate: plateMask(e.target.value) })}
-                                                            maxLength='8'
-                                                            className='form-control'
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <h5>Cor:</h5>
-                                                        <input 
-                                                            className='form-control'
-                                                            ref='color'
-                                                        />
-                                                    </div>
-                                                </Form1>
-                                                <Form2>
-                                                    <FormCheck>
+                                            <Form1>
+                                                <div>
+                                                    <h5>Modelo:</h5>
+                                                    <input
+                                                        className='form-control'
+                                                        ref='model'
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h5>Placa:</h5>
+                                                    <input
+                                                        value={plate}
+                                                        onChange={e => this.setState({ plate: plateMask(e.target.value) })}
+                                                        maxLength='8'
+                                                        className='form-control'
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h5>Cor:</h5>
+                                                    <input
+                                                        className='form-control'
+                                                        ref='color'
+                                                    />
+                                                </div>
+                                            </Form1>
+                                            <Form2>
+                                                <FormCheck>
                                                     <h5>Tipo:</h5>
-                                                        <div class="form-check">
-                                                            <input 
-                                                                class="form-check-input" 
-                                                                type="radio" name="Radios" 
-                                                                id="Radios1" 
-                                                                value="option1"
-                                                                onChange={() => this.setState({car: true, moto: false})}
-                                                            />
-                                                            <label class="form-check-label" for="Radios1">
-                                                                Carro
+                                                    <div class="form-check">
+                                                        <input
+                                                            class="form-check-input"
+                                                            type="radio" name="Radios"
+                                                            id="Radios1"
+                                                            value="option1"
+                                                            onChange={() => this.setState({ car: true, moto: false })}
+                                                        />
+                                                        <label class="form-check-label" for="Radios1">
+                                                            Carro
                                                             </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input 
-                                                                class="form-check-input"
-                                                                type="radio" 
-                                                                name="Radios" 
-                                                                id="Radios2" 
-                                                                value="option2"
-                                                                onChange={() => this.setState({moto: true, car: false})}
-                                                            />
-                                                            <label class="form-check-label" for="Radios2">
-                                                                Moto
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input
+                                                            class="form-check-input"
+                                                            type="radio"
+                                                            name="Radios"
+                                                            id="Radios2"
+                                                            value="option2"
+                                                            onChange={() => this.setState({ moto: true, car: false })}
+                                                        />
+                                                        <label class="form-check-label" for="Radios2">
+                                                            Moto
                                                             </label>
-                                                        </div>
-                                                    </FormCheck>
-                                                </Form2>
-                                            </FormAddClient>
+                                                    </div>
+                                                </FormCheck>
+                                            </Form2>
+                                        </FormAddClient>
 
-                                            <CreateClientButton>
-                                                <button
-                                                    onClick={() => this.handleVehicleRegister()}
-                                                >
-                                                    Cadastrar
+                                        <CreateClientButton>
+                                            <button
+                                                onClick={() => this.handleVehicleRegister()}
+                                            >
+                                                Cadastrar
                                                 </button>
-                                            </CreateClientButton>
-                                        </InternModalContainer>
-                                    </ModalContainer>
+                                        </CreateClientButton>
+                                    </InternModalContainer>
+                                </ModalContainer>
                             </InternContainer>
                         </Container>
                     ) : (
-                        null
-                    )
+                            null
+                        )
                 }
             </>
         );
@@ -243,6 +243,6 @@ class AddCar extends Component {
 
 const mapStateToProps = state => ({
     AddCar: state.modal
-  });
-  
+});
+
 export default connect(mapStateToProps)(AddCar)
