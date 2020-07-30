@@ -30,26 +30,31 @@ export const Title = styled.h1`
 `
 
 export const FormAddClient = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
-
     hr{
         width: 95%;
-        margin: 30px 0;
+        /* margin: 30px 0; */
+    }
+
+    @media(min-width: 1600px){
+        margin-top: 4%;
     }
 `
 
 export const Form1 = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
     margin-right: 30px;
     justify-content: space-between;
 
     div{
+        width: 100%;
 
         input{
-            width: 350px;
+            width: 100%;
 
         }
         
@@ -73,9 +78,10 @@ export const Form2 = styled.div`
     margin-right: 30px;
 
     div{
-
+        width: 100%;
+        
         input{
-            width: 350px;
+            width: 32.5%;
 
         }
         
@@ -87,6 +93,17 @@ export const Form2 = styled.div`
         }
 
         margin-right: 40px;
+    }
+    
+    @media(max-width: 1366px){
+        div{
+            width: 100%;
+            
+            input{
+                width: 31.8%;
+
+            }
+        }
     }
 `
 

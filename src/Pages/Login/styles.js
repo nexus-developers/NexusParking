@@ -45,7 +45,7 @@ export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     /* margin-top: 80px; */
-    margin-top: 20%;
+    margin-top: 10%;
     
     label{
         color: #FFA43B;
@@ -70,6 +70,9 @@ export const FormContainer = styled.div`
         color: #FFA43B;
     }
     
+    @media(min-width: 1920px){
+        margin-top: 20%;
+    }
     `
 
 export const UserForm = styled.div`

@@ -11,7 +11,6 @@ export const PaymentContainer = styled.div`
     h1{
         color: #FFA43B;
         font-size: 50px;
-        margin-top: 40px;
         text-align: center;
     }
 
@@ -24,12 +23,18 @@ export const PaymentContainer = styled.div`
 
     p{
         margin-left: 70px;
-        margin-top: 20px;
         color: #707070;
     }
-    
 
-    
+    @media(min-width: 1920px){
+        h1{
+            margin-top: 9%;
+        }
+
+        p{
+            margin-top: 4.5%;
+        }
+    }
 `;
 
 export const CloseButton = styled.div`
@@ -47,7 +52,10 @@ export const Title = styled.h2`
     color: #FFA43B;
     font-size: 30px;
     text-align: center;
-    margin-top: 20px;
+
+    @media(min-width: 1920px){
+        margin-top: 4.5%;
+    }
 `
 
 export const ValueHour = styled.div`
