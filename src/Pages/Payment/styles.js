@@ -92,7 +92,7 @@ export const  PaymentButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 3%;
 `
 export const PaymentButton = styled.button`
     width: 300px;

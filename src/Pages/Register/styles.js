@@ -42,7 +42,6 @@ export const CloseButton = styled.div`
 `
 
 export const AreaInputs1 = styled.div`
-    margin-top: 60px;
     margin-left: 60px;
     margin-right: 60px;
     display: flex;
@@ -65,6 +64,10 @@ export const AreaInputs1 = styled.div`
         input{
             width: 100%;
         }
+    }
+
+    @media(min-width: 1920px){
+        margin-top: 60px;
     }
 `
 
