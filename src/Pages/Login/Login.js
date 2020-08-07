@@ -36,7 +36,7 @@ const schema = Yup.object().shape({
         .email('Insira um e-mail válido!')
         .required('Campo de e-mail é obrigatório!'),
     password: Yup.string()
-        .required('Campod de senha é obrigatório!')
+        .required('Campo de senha é obrigatório!')
 })
 
 class Login extends Component {
