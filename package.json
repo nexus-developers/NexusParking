@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rocketseat/unform": "^1.6.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "dotenv": "^8.2.0",
     "firebase": "^7.14.2",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
@@ -20,7 +20,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",

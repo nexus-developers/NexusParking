@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
+import { Form, Input } from '@rocketseat/unform'
 import { connect } from 'react-redux'
-
+import * as Yup from 'yup';
 import { Link } from 'react-router-dom'
 
 import Api from '../../Services/Api';
 
-import { 
+import {
     Container,
     LoginContainer,
     CarouselContainer,
@@ -31,17 +31,28 @@ import Logo from './assets/Logo.png'
 
 import CarouselComponent from '../../Components/Carousel/Carousel'
 
+const schema = Yup.object().shape({
+    email: Yup.string()
+        .email('Insira um e-mail válido!')
+        .required('Campo de e-mail é obrigatório!'),
+    password: Yup.string()
+        .required('Campod de senha é obrigatório!')
+})
 
 class Login extends Component {
+    state = {
+        email: '',
+        password: ''
+    }
 
-    componentDidMount(){
+    componentDidMount() {
         this.userLogged();
     }
 
     userLogged = () => {
         const token = localStorage.getItem('token');
 
-        if(token){
+        if (token) {
             Api.defaults.headers.authorization = `Barrer ${token}`;
             const { history } = this.props
             return history.push(`/dashboard`);
@@ -49,8 +60,9 @@ class Login extends Component {
     }
 
     handleLogin = async e => {
-        const email = this.refs.email.value;
-        const password = this.refs.password.value.toString();
+        const { email, password } = this.state;
+        // const email = this.refs.email.value;
+        // const password = this.refs.password.value.toString();
 
         const info = { email, password }
 
@@ -69,65 +81,73 @@ class Login extends Component {
             console.log(error)
         }
     }
-    
+
     openModal = () => {
         const { dispatch } = this.props
-    
+
         dispatch({
             type: 'MODAL'
         })
     }
 
-    render(){
-    const { modalOpen } = this.props
-    // const { history } = this.props
-    
+    render() {
+        const { modalOpen } = this.props
+        // const { history } = this.props
+
         return (
             <Container className=''>
                 <div className='row'>
                     <LoginContainer className='col-md-4'>
                         <LogoContainer>
-                            <img src={Logo} alt='logo'/>
+                            <img src={Logo} alt='logo' />
                         </LogoContainer>
-                        <FormContainer>
-                            <UserForm>
-                                <label>Usuário:</label>
-                                <small>Digite seu usuário ou e-mail</small>
-                                <input className='form-control'
-                                    ref='email'
-                                />
-                                <Link>
-                                    Esqueceu o usuário?
+                        <Form schema={schema} onSubmit={this.handleLogin}>
+                            <FormContainer>
+                                <UserForm>
+                                    <label>Usuário:</label>
+                                    <small>Digite seu usuário ou e-mail</small>
+                                    <Input
+                                        onChange={e => this.setState({ email: e.target.value })}
+                                        name='email'
+                                        className='form-control'
+                                        ref='email'
+                                    />
+                                    <Link>
+                                        Esqueceu o usuário?
                                 </Link>
-                            </UserForm>
-                            <PasswordForm>
-                                <label>Senha:</label>
-                                <input className='form-control'
-                                    ref='password'
-                                    type='password'
-                                />
-                                <Link>
-                                    Oops, esqueci minha senha...
+                                </UserForm>
+                                <PasswordForm>
+                                    <label>Senha:</label>
+                                    <Input
+                                        onChange={e => this.setState({ password: e.target.value })}
+                                        name='password'
+                                        className='form-control'
+                                        ref='password'
+                                        type='password'
+                                    />
+                                    <Link>
+                                        Oops, esqueci minha senha...
                                 </Link>
-                            </PasswordForm>
+                                </PasswordForm>
 
-                        </FormContainer>
+                            </FormContainer>
 
-                        <Link>
+
                             <SubmitButton
-                                onClick={() => this.handleLogin()}
+                                type="submit"
                             >
                                 Fazer Login
                             </SubmitButton>
-                        </Link>
 
-                        <h5>Assinar o Nexus Parking</h5>
-                        <RegisterButton
-                            onClick={() => this.openModal()}
+
+                            <h5>Assinar o Nexus Parking</h5>
+                            <RegisterButton
+                                onClick={() => this.openModal()}
                             >
-                        Assinar
-                        </RegisterButton>
+                                Assinar
+                            </RegisterButton>
                             <SmallText>Todos os direitos reservados há Nexus Developers!</SmallText>
+                        </Form>
                     </LoginContainer>
                     <CarouselContainer className='col-md-8'>
                         <Title1>
@@ -154,17 +174,17 @@ class Login extends Component {
                                 </ol>
                             </div>
                             <div className='col-md-8'>
-                                <CarouselComponent/>
+                                <CarouselComponent />
                             </div>
                         </Carousel>
                     </CarouselContainer>
                 </div>
                 {
                     modalOpen ? (
-                        <Register/>
+                        <Register />
                     ) : (
-                        null
-                    )
+                            null
+                        )
                 }
             </Container>
         );
@@ -172,7 +192,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  modalOpen: state.modal
+    modalOpen: state.modal
 });
 
 export default connect(mapStateToProps)(Login)
