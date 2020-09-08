@@ -4,10 +4,12 @@ import modal from './Modal/Reducer'
 import information from './Information/Reducer'
 import payment from './Payment/Reducer'
 import reports from './Reports/Reducer'
+import administrador from './Administrador/Reducer'
 
 export default combineReducers({
     modal,
     information,
     payment,
-    reports
+    reports,
+    administrador
 })
