@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 
 import { Link, useHistory } from 'react-router-dom'
 
-import { 
+import {
   Container,
   LogoContainer,
   MenuContainer
@@ -17,6 +17,7 @@ import { AiFillCalendar } from 'react-icons/ai';
 import Logo from './assets/Logo.png'
 
 import Report from '../../Pages/Reports/Report';
+import Adm from '../../Pages/AdmPassword/AdmPassword';
 
 function Sidebar(props) {
   const history = useHistory();
@@ -24,7 +25,7 @@ function Sidebar(props) {
 
   const singOut = () => {
     localStorage.removeItem('token');
-    
+
     history.push('/')
   }
 
@@ -32,49 +33,67 @@ function Sidebar(props) {
     // const { dispatch } = this.props
 
     dispatch({
-        type: 'REPORT'
+      type: 'REPORT'
     })
+  }
+
+  const openAdm = () => {
+    dispatch({
+      type: 'ADMINISTRADOR'
+    });
   }
 
   return (
     <>
-   <Container className='shadow'>
-       <LogoContainer>
-          <img src={Logo} alt='Logo'/>
-       </LogoContainer>
+      <Container className='shadow'>
+        <LogoContainer>
+          <img src={Logo} alt='Logo' />
+        </LogoContainer>
 
-       <MenuContainer>
-         <Link>
-            <li>
-              <FaHome color='#424242' size={20}/>
+        <MenuContainer>
+          <Link>
+            <li onClick={() => history.push('/dashboard')}>
+              <FaHome color='#424242' size={20} />
               Home
             </li>
             <li onClick={() => openModal()}>
-              <AiFillCalendar color='#424242' size={20}/>
+              <AiFillCalendar color='#424242' size={20} />
               Relatório
             </li>
+            <li onClick={() => openAdm()}>
+              Administrativo
+            </li>
             <li onClick={() => singOut()}>
-            <GiExitDoor color='#424242' size={20}/>
+              <GiExitDoor color='#424242' size={20} />
             Sair
             </li>
-         </Link>
-       </MenuContainer>
-      
-   </Container>
+          </Link>
+        </MenuContainer>
 
-  {
-    props.modalOpen ? (
-      <Report/>
-    ) : (
-      null
-    )
-  }
-  </>
+      </Container>
+
+      {
+        props.modalOpen ? (
+          <Report />
+        ) : (
+            null
+          )
+      }
+      {
+        props.Adm ? (
+          <Adm />
+        ) : (
+            null
+          )
+
+      }
+    </>
   );
 }
 
 const mapStateToProps = state => ({
-  modalOpen: state.reports
+  modalOpen: state.reports,
+  Adm: state.administrador
 });
 
 export default connect(mapStateToProps)(Sidebar)
