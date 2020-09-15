@@ -52,7 +52,7 @@ function Sidebar(props) {
 
         <MenuContainer>
           <Link>
-            <li>
+            <li onClick={() => history.push('/dashboard')}>
               <FaHome color='#424242' size={20} />
               Home
             </li>
@@ -77,12 +77,15 @@ function Sidebar(props) {
           <Report />
         ) : (
             null
-          ),
+          )
+      }
+      {
         props.Adm ? (
           <Adm />
         ) : (
             null
           )
+
       }
     </>
   );

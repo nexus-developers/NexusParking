@@ -19,8 +19,8 @@ export const AdmContainer = styled.div`
         text-align: center;
     }
 
-    form {
-        /* width: 100%; */
+    /* form {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -43,7 +43,7 @@ export const AdmContainer = styled.div`
                 padding-bottom: 1%;;
             }
         }
-    }
+    } */
 
     label {
         width: 100%;
@@ -72,4 +72,34 @@ export const CloseButton = styled.div`
         outline: none;
         background-color: transparent;
     }
+`
+
+export const Form = styled.div`
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 20px 20px 20px;
+
+    button {
+        width: 100%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        background-color: #fff;
+        border: 2px solid #FFA43B;
+        border-radius: 4px;
+        color: #FFA43B;
+        font-weight: bold;
+        margin-top: 8%;
+
+        @media(min-width: 1920px) {
+            padding-top: 1%;
+            padding-bottom: 1%;;
+        }
+    }
+`
+
+export const Error = styled.p`
+    color: #FF0000;
 `
